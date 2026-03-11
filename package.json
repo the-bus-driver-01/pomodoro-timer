@@ -7,7 +7,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:storage": "jest lib/storage.test.ts"
+    "test:storage": "jest lib/storage.test.ts",
+    "pnpm:test": "pnpm exec jest",
+    "pnpm:test:coverage": "pnpm exec jest --coverage"
   },
   "keywords": [
     "localStorage",

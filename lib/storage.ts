@@ -4,7 +4,7 @@
  * different data types and error handling.
  */
 
-export type StorageValue = string | number | boolean | object | any[] | null;
+export type StorageValue = string | number | boolean | Record<string, any> | Array<any> | null;
 
 export interface StorageOptions {
   prefix?: string;
@@ -12,6 +12,8 @@ export interface StorageOptions {
     stringify: (value: any) => string;
     parse: (value: string) => any;
   };
+  enableLogging?: boolean;
+  storageQuota?: number;
 }
 
 export class StorageService {
@@ -20,6 +22,8 @@ export class StorageService {
     stringify: (value: any) => string;
     parse: (value: string) => any;
   };
+  private enableLogging: boolean;
+  private storageQuota: number;
 
   constructor(options: StorageOptions = {}) {
     this.prefix = options.prefix || '';
@@ -27,6 +31,8 @@ export class StorageService {
       stringify: JSON.stringify,
       parse: JSON.parse
     };
+    this.enableLogging = options.enableLogging ?? false;
+    this.storageQuota = options.storageQuota ?? (5 * 1024 * 1024); // Default 5MB
   }
 
   /**
@@ -47,7 +53,7 @@ export class StorageService {
       localStorage.setItem(fullKey, serializedValue);
       return true;
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      this.logError('Error saving to localStorage:', error);
       return false;
     }
   }
@@ -73,7 +79,7 @@ export class StorageService {
 
       return this.serializer.parse(item);
     } catch (error) {
-      console.error('Error retrieving from localStorage:', error);
+      this.logError('Error retrieving from localStorage:', error);
       return defaultValue !== undefined ? defaultValue : null;
     }
   }
@@ -90,7 +96,7 @@ export class StorageService {
       const newValue = updater(currentValue);
       return this.save(key, newValue);
     } catch (error) {
-      console.error('Error updating localStorage:', error);
+      this.logError('Error updating localStorage:', error);
       return false;
     }
   }
@@ -110,7 +116,7 @@ export class StorageService {
       localStorage.removeItem(fullKey);
       return true;
     } catch (error) {
-      console.error('Error deleting from localStorage:', error);
+      this.logError('Error deleting from localStorage:', error);
       return false;
     }
   }
@@ -147,7 +153,7 @@ export class StorageService {
       keysToDelete.forEach(key => localStorage.removeItem(key));
       return true;
     } catch (error) {
-      console.error('Error clearing localStorage:', error);
+      this.logError('Error clearing localStorage:', error);
       return false;
     }
   }
@@ -167,7 +173,7 @@ export class StorageService {
         }
       }
     } catch (error) {
-      console.error('Error getting keys from localStorage:', error);
+      this.logError('Error getting keys from localStorage:', error);
     }
 
     return keys;
@@ -188,14 +194,25 @@ export class StorageService {
         }
       }
 
-      // Typical localStorage quota is 5MB (5 * 1024 * 1024 characters)
-      const total = 5 * 1024 * 1024;
+      // Use configured storage quota
+      const total = this.storageQuota;
       const available = total - used;
 
       return { used, total, available };
     } catch (error) {
-      console.error('Error getting storage info:', error);
+      this.logError('Error getting storage info:', error);
       return { used: 0, total: 0, available: 0 };
+    }
+  }
+
+  /**
+   * Log errors if logging is enabled
+   * @param message - The error message
+   * @param error - The error object (optional)
+   */
+  private logError(message: string, error?: any): void {
+    if (this.enableLogging) {
+      console.error(message, error);
     }
   }
 
