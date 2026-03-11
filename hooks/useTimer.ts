@@ -23,8 +23,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
 
   // Session completion handlers
   const handleWorkSessionComplete = useCallback(async () => {
-    console.log('Work session completed');
-
     // Send notification for work session completion
     try {
       await sendNotification(
@@ -54,8 +52,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
   }, [config.breakDuration]);
 
   const handleBreakSessionComplete = useCallback(async () => {
-    console.log('Break session completed');
-
     // Send notification for break session completion
     try {
       await sendNotification(
