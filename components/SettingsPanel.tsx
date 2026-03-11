@@ -87,7 +87,7 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
     }
   }
 
-  const handleSave = async () => {
+  const handleSave = () => {
     setIsSubmitting(true)
     setErrors({})
 
