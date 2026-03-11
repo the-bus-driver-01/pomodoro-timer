@@ -29,8 +29,8 @@ const useTimer = (): UseTimerReturn => {
   const getCustomIntervals = useCallback((): CustomIntervals => {
     if (typeof window === 'undefined') {
       return {
-        work: DEFAULT_WORK_MINUTES * 60,
-        break: DEFAULT_BREAK_MINUTES * 60,
+        work: DEFAULT_WORK_MINUTES * 60 * 1000,
+        break: DEFAULT_BREAK_MINUTES * 60 * 1000,
       };
     }
 
@@ -39,13 +39,13 @@ const useTimer = (): UseTimerReturn => {
       const breakMinutes = localStorage.getItem('break-interval');
 
       return {
-        work: workMinutes ? parseInt(workMinutes, 10) * 60 : DEFAULT_WORK_MINUTES * 60,
-        break: breakMinutes ? parseInt(breakMinutes, 10) * 60 : DEFAULT_BREAK_MINUTES * 60,
+        work: workMinutes ? parseInt(workMinutes, 10) * 60 * 1000 : DEFAULT_WORK_MINUTES * 60 * 1000,
+        break: breakMinutes ? parseInt(breakMinutes, 10) * 60 * 1000 : DEFAULT_BREAK_MINUTES * 60 * 1000,
       };
     } catch (error) {
       return {
-        work: DEFAULT_WORK_MINUTES * 60,
-        break: DEFAULT_BREAK_MINUTES * 60,
+        work: DEFAULT_WORK_MINUTES * 60 * 1000,
+        break: DEFAULT_BREAK_MINUTES * 60 * 1000,
       };
     }
   }, []);
