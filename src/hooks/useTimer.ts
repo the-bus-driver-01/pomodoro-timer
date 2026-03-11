@@ -56,7 +56,7 @@ const useTimer = (): UseTimerReturn => {
   const [sessionType, setSessionType] = useState<'work' | 'break'>('work');
   const [isRunning, setIsRunning] = useState(false);
 
-  const duration = sessionType === 'work' ? intervals.current.work : intervals.current.break;
+  const duration = (sessionType === 'work' ? intervals.current.work : intervals.current.break) / 1000;
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -91,7 +91,7 @@ const useTimer = (): UseTimerReturn => {
         const newElapsed = prevElapsed + INTERVAL_MS;
 
         // Check if we've reached or exceeded the duration
-        if (newElapsed >= duration) {
+        if (newElapsed >= duration * 1000) {
           // Toggle session type
           setSessionType(prevType => prevType === 'work' ? 'break' : 'work');
           // Reset elapsed time for new session
