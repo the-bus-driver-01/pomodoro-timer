@@ -582,32 +582,7 @@ export function isTaskStatus(value: any): value is TaskStatus {
 // ============================================================================
 
 export default {
-  // Types
-  Priority,
-  SessionType,
-  TimerState,
-  TimePeriod,
-  TaskStatus,
-
-  // Interfaces
-  Timer,
-  Task,
-  Session,
-  Stats,
-  AppState,
-
-  // Utility Types
-  CreateTaskInput,
-  UpdateTaskInput,
-  CreateSessionInput,
-  SessionFilters,
-  TaskFilters,
-  TimerConfig,
-  ApiResponse,
-  PaginationParams,
-  PaginatedResponse,
-
-  // Type Guards
+  // Type Guards (runtime functions only)
   isPriority,
   isSessionType,
   isTimerState,
