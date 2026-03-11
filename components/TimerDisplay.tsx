@@ -21,17 +21,19 @@ export default function TimerDisplay({ elapsed, duration, sessionType }: TimerDi
   const getSessionConfig = () => {
     if (sessionType === 'work') {
       return {
-        label: 'Work',
-        textColor: 'text-blue-600',
-        bgGradient: 'from-blue-50 to-green-50',
-        borderColor: 'border-blue-200'
+        label: 'Work Session',
+        textColor: 'text-red-600',
+        bgGradient: 'from-red-50 to-red-100',
+        borderColor: 'border-red-200',
+        labelBg: 'bg-red-100'
       }
     } else {
       return {
-        label: 'Break',
-        textColor: 'text-orange-600',
-        bgGradient: 'from-orange-50 to-yellow-50',
-        borderColor: 'border-orange-200'
+        label: 'Break Session',
+        textColor: 'text-green-600',
+        bgGradient: 'from-green-50 to-green-100',
+        borderColor: 'border-green-200',
+        labelBg: 'bg-green-100'
       }
     }
   }
@@ -49,8 +51,9 @@ export default function TimerDisplay({ elapsed, duration, sessionType }: TimerDi
       {/* Session type label */}
       <div className={`
         text-lg font-semibold mb-4 px-4 py-2 rounded-full
-        ${config.textColor} ${config.bgGradient}
+        ${config.textColor} ${config.labelBg}
         border ${config.borderColor}
+        shadow-sm
       `}>
         {config.label}
       </div>
