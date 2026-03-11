@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Animation Timing */
+:root {
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.5s;
+  --animation-duration-very-slow: 1s;
+  --animation-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --animation-ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --animation-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Timer Pulse Animation - Subtle breathing effect */
+@keyframes timer-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Status Fade Animation - Smooth color transitions */
+@keyframes status-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Press Animation - Enhanced tactile feedback */
+@keyframes button-press {
+  0% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(0.95) translateY(2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Digit Flip Animation - Smooth number transitions */
+@keyframes digit-flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Progress Glow Animation - Visual progress indication */
+@keyframes progress-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+/* Warning Flash Animation - Attention grabbing */
+@keyframes warning-flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.7;
+  }
+}
+
+/* Completion Celebration Animation */
+@keyframes celebrate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Utility Animation Classes */
+@layer utilities {
+  /* Timer-specific animations */
+  .animate-timer-pulse {
+    animation: timer-pulse var(--animation-duration-very-slow) var(--animation-ease-in-out) infinite;
+  }
+
+  .animate-status-fade {
+    animation: status-fade var(--animation-duration-normal) var(--animation-ease-out) forwards;
+  }
+
+  .animate-button-press {
+    animation: button-press var(--animation-duration-fast) var(--animation-ease-out);
+  }
+
+  .animate-digit-flip {
+    animation: digit-flip var(--animation-duration-normal) var(--animation-ease-in-out);
+  }
+
+  .animate-progress-glow {
+    animation: progress-glow var(--animation-duration-slow) var(--animation-ease-in-out) infinite;
+  }
+
+  .animate-warning-flash {
+    animation: warning-flash var(--animation-duration-normal) var(--animation-ease-in-out) infinite;
+  }
+
+  .animate-celebrate {
+    animation: celebrate var(--animation-duration-slow) var(--animation-bounce) 2;
+  }
+
+  /* Enhanced transitions */
+  .transition-colors-smooth {
+    transition: color var(--animation-duration-normal) var(--animation-ease-out),
+                background-color var(--animation-duration-normal) var(--animation-ease-out),
+                border-color var(--animation-duration-normal) var(--animation-ease-out);
+  }
+
+  .transition-transform-smooth {
+    transition: transform var(--animation-duration-normal) var(--animation-ease-out);
+  }
+
+  .transition-all-smooth {
+    transition: all var(--animation-duration-normal) var(--animation-ease-out);
+  }
+
+  /* State-based animation modifiers */
+  .running-state {
+    @apply animate-timer-pulse;
+  }
+
+  .warning-state {
+    @apply animate-warning-flash;
+  }
+
+  .complete-state {
+    @apply animate-celebrate;
+  }
+
+  /* Button interaction enhancements */
+  .btn-interactive {
+    @apply transition-all-smooth hover:scale-105 active:scale-95;
+    transform-origin: center;
+  }
+
+  .btn-press-feedback:active {
+    @apply animate-button-press;
+  }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Maintain essential animations but make them subtle */
+  .animate-timer-pulse {
+    animation: none;
+    opacity: 0.9;
+  }
+
+  .animate-warning-flash {
+    animation: none;
+    opacity: 0.8;
+  }
+
+  .animate-celebrate {
+    animation: none;
+    transform: scale(1.05);
+  }
+}
+
+/* Dark mode support for animations */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Adjust animation intensity for dark mode */
+    --animation-glow-intensity: 0.8;
+  }
+
+  @keyframes progress-glow {
+    0%, 100% {
+      box-shadow: 0 0 3px currentColor;
+    }
+    50% {
+      box-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
+    }
+  }
+}
