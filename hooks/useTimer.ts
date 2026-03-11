@@ -16,10 +16,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
   });
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const completionHandlerRef = useRef<{
-    onWorkComplete?: () => void;
-    onBreakComplete?: () => void;
-  }>({});
 
   // Session completion handlers
   const handleWorkSessionComplete = useCallback(async () => {
@@ -44,11 +40,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
       sessionType: 'break',
       currentTime: config.breakDuration,
     }));
-
-    // Call work completion handler if provided
-    if (completionHandlerRef.current.onWorkComplete) {
-      completionHandlerRef.current.onWorkComplete();
-    }
   }, [config.breakDuration]);
 
   const handleBreakSessionComplete = useCallback(async () => {
@@ -73,11 +64,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
       sessionType: 'work',
       currentTime: config.workDuration,
     }));
-
-    // Call break completion handler if provided
-    if (completionHandlerRef.current.onBreakComplete) {
-      completionHandlerRef.current.onBreakComplete();
-    }
   }, [config.workDuration]);
 
   // Countdown effect
@@ -154,14 +140,6 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
     });
   }, [config.workDuration]);
 
-  // Set completion handlers (will be used in step 2)
-  const setCompletionHandlers = useCallback((handlers: {
-    onWorkComplete?: () => void;
-    onBreakComplete?: () => void;
-  }) => {
-    completionHandlerRef.current = handlers;
-  }, []);
-
   return {
     currentTime: timerState.currentTime,
     sessionType: timerState.sessionType,
@@ -171,7 +149,5 @@ export const useTimer = (config: TimerConfig = DEFAULT_CONFIG): UseTimerReturn =
     pause,
     stop,
     reset,
-    // Internal method for step 2
-    _setCompletionHandlers: setCompletionHandlers,
-  } as UseTimerReturn & { _setCompletionHandlers: typeof setCompletionHandlers };
+  };
 };
