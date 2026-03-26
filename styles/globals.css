@@ -1,0 +1,262 @@
+/* Global styles for the Pomodoro Timer */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility Classes */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+/* Background Colors */
+.bg-red-100 {
+  background-color: #fee2e2;
+}
+
+.bg-green-100 {
+  background-color: #dcfce7;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* Text Colors */
+.text-red-800 {
+  color: #991b1b;
+}
+
+.text-green-800 {
+  color: #166534;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+/* Text Sizes */
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Font Weights */
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Spacing */
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Layout */
+.max-w-md {
+  max-width: 28rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+/* Borders and Shadows */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Button Styles */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.bg-red-500 {
+  background-color: #ef4444;
+}
+
+.bg-red-500:hover,
+.hover\:bg-red-600:hover {
+  background-color: #dc2626;
+}
+
+.bg-green-500 {
+  background-color: #22c55e;
+}
+
+.bg-green-500:hover,
+.hover\:bg-green-600:hover {
+  background-color: #16a34a;
+}
+
+.bg-yellow-500 {
+  background-color: #eab308;
+}
+
+.bg-yellow-500:hover,
+.hover\:bg-yellow-600:hover {
+  background-color: #ca8a04;
+}
+
+.bg-gray-500 {
+  background-color: #6b7280;
+}
+
+.bg-gray-500:hover,
+.hover\:bg-gray-600:hover {
+  background-color: #4b5563;
+}
+
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+
+.bg-blue-500:hover,
+.hover\:bg-blue-600:hover {
+  background-color: #2563eb;
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb;
+}
+
+/* Transitions */
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .text-6xl {
+    font-size: 3rem;
+  }
+
+  .p-8 {
+    padding: 1.5rem;
+  }
+
+  .mx-4 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
